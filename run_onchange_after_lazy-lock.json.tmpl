@@ -10,7 +10,7 @@
 
 if command -v nvim &> /dev/null; then
     echo "Syncing Neovim plugins with lazy-lock.json..."
-    nvim --headless "+Lazy! sync" +qa
+    nvim --headless "+Lazy! install" +qa
     echo "Neovim plugins synced successfully!"
 else
     echo "Warning: nvim not found in PATH, skipping plugin sync"
@@ -23,7 +23,7 @@ fi
 
 if command -v nvim &> /dev/null; then
     echo "Syncing Neovim plugins with lazy-lock.json..."
-    nvim --headless "+Lazy! sync" +qa
+    nvim --headless "+Lazy! install" +qa
     echo "Neovim plugins synced successfully!"
 else
     echo "Warning: nvim not found in PATH, skipping plugin sync"
