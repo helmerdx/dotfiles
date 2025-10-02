@@ -9,3 +9,8 @@ docker-compose.yml
 .oh-my-zsh/cache/grep-alias/
 .oh-my-zsh/cache/composer
 .oh-my-zsh/plugins/aliases
+
+# Neovim
+.config/nvim/lazyvim.json
+.cache/nvim
+.local/share/nvim
