@@ -1,0 +1,17 @@
+#!/bin/bash
+
+{{- if (eq .chezmoi.os "linux") }}
+{{-   if (or (eq .chezmoi.osRelease.id "ubuntu") (eq .chezmoi.osRelease.id "linuxmint")) }}
+
+# Copy neovim binary to /usr/local/bin
+if [ -f "$HOME/.neovim/bin/nvim" ]; then
+    echo "Installing neovim to /usr/local/bin/nvim..."
+    sudo cp "$HOME/.neovim/bin/nvim" /usr/local/bin/nvim
+    sudo chmod +x /usr/local/bin/nvim
+    echo "Neovim installed successfully!"
+else
+    echo "Neovim binary not found at $HOME/.neovim/bin/nvim"
+fi
+
+{{-   end }}
+{{- end }}
