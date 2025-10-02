@@ -1,6 +1,4 @@
 tap "adoptopenjdk/openjdk"
-tap "homebrew/bundle"
-tap "homebrew/services"
 tap "ngrok/ngrok"
 tap "warrensbox/tap"
 
