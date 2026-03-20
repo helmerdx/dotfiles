@@ -46,6 +46,7 @@ brew "wget"
 brew "yq"
 brew "zsh"
 brew "warrensbox/tap/tfswitch"
+brew "rustup"
 brew "volta"
 
 cask "alacritty"
