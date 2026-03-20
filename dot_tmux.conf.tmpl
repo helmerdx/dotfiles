@@ -130,11 +130,11 @@ set -ga status-left "#[bg=#{@thm_bg},fg=#{@thm_blue}]  #{=/-32/...:#{s|$USER|~|:
 set -ga status-left "#[bg=#{@thm_bg},fg=#{@thm_overlay_0},none]#{?window_zoomed_flag,│,}"
 set -ga status-left "#[bg=#{@thm_bg},fg=#{@thm_yellow}]#{?window_zoomed_flag,  zoom ,}"
 {{- else }}
-set -ga status-left "#{?client_prefix,#[bg=$od_red,fg=$od_bg,bold]  #S ,#[bg=$od_bg,fg=$od_green]  #S }"
-set -ga status-left "#[bg=$od_bg,fg=$od_gray,none]│"
-set -ga status-left "#[bg=$od_bg,fg=$od_blue]  #{=/-32/...:#{s|$USER|~|:#{b:pane_current_path}}} "
-set -ga status-left "#[bg=$od_bg,fg=$od_gray,none]#{?window_zoomed_flag,│,}"
-set -ga status-left "#[bg=$od_bg,fg=$od_yellow]#{?window_zoomed_flag,  zoom ,}"
+set -ga status-left "#{?client_prefix,#[bg=$od_red fg=$od_bg bold]  #S ,#[bg=$od_bg fg=$od_green]  #S }"
+set -ga status-left "#[bg=$od_bg fg=$od_gray]│"
+set -ga status-left "#[bg=$od_bg fg=$od_blue]  #{=/-32/...:#{s|$USER|~|:#{b:pane_current_path}}} "
+set -ga status-left "#[bg=$od_bg fg=$od_gray]#{?window_zoomed_flag,│,}"
+set -ga status-left "#[bg=$od_bg fg=$od_yellow]#{?window_zoomed_flag,  zoom ,}"
 {{- end }}
 
 # status right look and feel
@@ -145,9 +145,9 @@ set -ga status-right "#{?#{e|>=:10,#{battery_percentage}},#{#[bg=#{@thm_red},fg=
 set -ga status-right "#[bg=#{@thm_bg},fg=#{@thm_overlay_0}, none]│"
 set -ga status-right "#[bg=#{@thm_bg}]#{?#{==:#{online_status},ok},#[fg=#{@thm_mauve}] 󰖩 on ,#[fg=#{@thm_red},bold]#[reverse] 󰖪 off }"
 {{- else }}
-set -ga status-right "#{?#{e|>=:10,#{battery_percentage}},#[bg=$od_bg,fg=$od_red],#[bg=$od_bg,fg=$od_purple]} #{battery_icon} #{battery_percentage} "
-set -ga status-right "#[bg=$od_bg,fg=$od_gray,none]│"
-set -ga status-right "#{?#{==:#{online_status},ok},#[bg=$od_bg,fg=$od_teal] 󰖩 on ,#[bg=$od_bg,fg=$od_red,bold] 󰖪 off }"
+set -ga status-right "#{?#{e|>=:10,#{battery_percentage}},#[bg=$od_bg fg=$od_red],#[bg=$od_bg fg=$od_purple]} #{battery_icon} #{battery_percentage} "
+set -ga status-right "#[bg=$od_bg fg=$od_gray]│"
+set -ga status-right "#{?#{==:#{online_status},ok},#[bg=$od_bg fg=$od_teal] 󰖩 on ,#[bg=$od_bg fg=$od_red bold] 󰖪 off }"
 {{- end }}
 
 # Configure Tmux
