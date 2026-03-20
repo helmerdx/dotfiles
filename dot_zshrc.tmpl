@@ -125,6 +125,8 @@ function zvm_config {
 
 plugins=(
     aliases
+    aws
+    brew
     colored-man-pages
     composer
     docker
@@ -132,10 +134,14 @@ plugins=(
     fast-syntax-highlighting
     gh
     git
+    gpg-agent
     jsontools
+    macos
     npm
+    pre-commit
     rbenv
     ruby
+    sudo
     terraform
     tmux
     volta
@@ -163,6 +169,8 @@ export COMPOSER_MEMORY_LIMIT=-1
 export PATH=$HOME/.jetbrains:$PATH
 export PATH=$HOME/.composer/vendor/bin:$PATH
 {{ end }}
+
+fpath+=${ZSH_CUSTOM:-${ZSH}/custom}/plugins/zsh-completions/src
 
 source $ZSH/oh-my-zsh.sh
 
