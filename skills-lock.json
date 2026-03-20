@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "chezmoi-workflows": {
+      "source": "terrylica/cc-skills",
+      "sourceType": "github",
+      "computedHash": "832978893b32d9b0d68f959edabc73af3a8bb27cd301533bc488fbcfdc870d05"
+    }
+  }
+}
