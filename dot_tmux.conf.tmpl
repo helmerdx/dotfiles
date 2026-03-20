@@ -76,6 +76,19 @@ bind-key - split-window -v -c "#{pane_current_path}"
 bind-key r source-file ~/.tmux.conf \; display-message "Config reloaded"
 bind C-l send-keys 'C-l'
 bind x kill-pane
+# Remap find-window to tmux-fzf (prefix + f)
+bind-key f run-shell -b "~/.tmux/plugins/tmux-fzf/scripts/session.sh"
+
+{{- if eq .chezmoi.os "darwin" }}
+# Message / command prompt colors (One Dark)
+set -g message-style "fg=$od_fg,bg=$od_bg,bold"
+set -g message-command-style "fg=$od_fg,bg=$od_bg,bold"
+set -g mode-style "fg=$od_bg,bg=$od_yellow,bold"
+{{- else }}
+set -g message-style "fg=#{@thm_fg},bg=#{@thm_bg},bold"
+set -g message-command-style "fg=#{@thm_fg},bg=#{@thm_bg},bold"
+set -g mode-style "fg=#{@thm_bg},bg=#{@thm_peach},bold"
+{{- end }}
 
 # TPM Plugins
 set -g @plugin "tmux-plugins/tpm"
