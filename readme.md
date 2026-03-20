@@ -149,3 +149,116 @@ set clipboard=unnamed
 | `<leader> + t + l` | Test: Run last | Normal |
 | `<leader> + t + c` | Test: Coverage last | Normal |
 | `<leader> + d + b` | Breakpoint: Toggle | Normal |
+
+## Tmux Shortcuts
+
+> Prefix is `C-Space` (macOS / Linux) or `C-a` (WSL)
+
+### Sessions
+
+| Shortcut | Description |
+| --- | --- |
+| `prefix + $` | Rename session |
+| `prefix + s` | List / switch sessions |
+| `prefix + d` | Detach from session |
+| `prefix + (` | Previous session |
+| `prefix + )` | Next session |
+
+### Windows
+
+| Shortcut | Description |
+| --- | --- |
+| `prefix + c` | New window |
+| `prefix + ,` | Rename window |
+| `prefix + w` | List / switch windows |
+| `prefix + n` | Next window |
+| `prefix + p` | Previous window |
+| `prefix + 0-9` | Select window by number |
+| `prefix + &` | Kill window |
+| `prefix + f` | Find window by name |
+
+### Panes
+
+| Shortcut | Description |
+| --- | --- |
+| `prefix + \|` | Split pane vertically (current path) |
+| `prefix + -` | Split pane horizontally (current path) |
+| `prefix + x` | Kill pane (no confirmation) |
+| `prefix + z` | Zoom / unzoom pane |
+| `prefix + q` | Show pane numbers |
+| `prefix + o` | Next pane |
+| `prefix + ;` | Last active pane |
+| `prefix + !` | Break pane into its own window |
+| `prefix + {` | Swap pane with previous |
+| `prefix + }` | Swap pane with next |
+| `prefix + <` | Swap pane up |
+| `prefix + >` | Swap pane down |
+| `prefix + Space` | Cycle through layouts |
+
+### Pane Resizing
+
+| Shortcut | Description |
+| --- | --- |
+| `prefix + H` | Resize pane left 5 |
+| `prefix + J` | Resize pane down 5 |
+| `prefix + K` | Resize pane up 5 |
+| `prefix + L` | Resize pane right 5 |
+
+### Navigation (vim-tmux-navigator)
+
+| Shortcut | Description |
+| --- | --- |
+| `C-h` | Move to pane left |
+| `C-j` | Move to pane below |
+| `C-k` | Move to pane above |
+| `C-l` | Move to pane right |
+| `C-\` | Move to last active pane |
+
+### Copy Mode
+
+| Shortcut | Description |
+| --- | --- |
+| `prefix + v` | Enter copy mode |
+| `prefix + [` | Enter copy mode (default) |
+| `prefix + ]` | Paste |
+| `v` | Begin selection |
+| `C-v` | Toggle rectangle selection |
+| `y` | Copy selection and exit |
+| `H` | Jump to start of line |
+| `L` | Jump to end of line |
+| `Escape` | Cancel / exit copy mode |
+
+### Copy Mode — tmux-yank
+
+| Shortcut | Description |
+| --- | --- |
+| `y` | Copy selection to system clipboard |
+| `Y` | Copy current line to system clipboard |
+| `D` | Copy from cursor to end of line |
+
+### Copy Mode — tmux-open
+
+| Shortcut | Description |
+| --- | --- |
+| `o` | Open selection with default app / browser |
+| `C-o` | Open selection in `$EDITOR` |
+| `S` | Search selection with web browser |
+
+### Plugins
+
+| Shortcut | Description |
+| --- | --- |
+| `prefix + F` | tmux-fzf: fuzzy find sessions, windows, panes, commands |
+| `prefix + Space` | tmux-thumbs: hint-based yank for any visible text |
+| `prefix + C-s` | tmux-resurrect: save session |
+| `prefix + C-r` | tmux-resurrect: restore session |
+
+### Misc
+
+| Shortcut | Description |
+| --- | --- |
+| `prefix + r` | Reload tmux config |
+| `prefix + C-l` | Send `Ctrl-L` (clear screen) to pane |
+| `prefix + :` | Open command prompt |
+| `prefix + ?` | List all keybindings |
+| `prefix + t` | Show clock |
