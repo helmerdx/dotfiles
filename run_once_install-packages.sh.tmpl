@@ -29,14 +29,6 @@ function setup() {
   mkdir -p "$APPS_PATH"
 }
 
-function install_omz() {
-  if [ -d {{ .chezmoi.homeDir }}/.oh-my-zsh ]; then
-      cd {{ .chezmoi.homeDir }}/.oh-my-zsh/tools
-      sh ./install.sh --unattended --keep-zshrc
-      cd {{ .chezmoi.homeDir }}
-  fi
-}
-
 function install_fzf() {
   if [ -d {{ .chezmoi.homeDir }}/.fzf ]; then
     cd {{ .chezmoi.homeDir }}/.fzf
@@ -102,8 +94,6 @@ fi
 if ! exist zsh; then
   sudo nala install -y zsh
 fi
-
-install_omz
 
 install_fzf
 
@@ -193,8 +183,6 @@ if ! exist zsh; then
   sudo pacman -S --noconfirm zsh
 fi
 
-install_omz
-
 if ! exist ripgrep; then
   sudo pacman -S --noconfirm ripgrep
 fi
@@ -253,8 +241,6 @@ fi
 if ! exist zsh; then
   sudo dnf install -y zsh --quiet
 fi
-
-install_omz
 
 install_fzf
 
