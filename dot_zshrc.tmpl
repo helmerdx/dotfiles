@@ -337,3 +337,11 @@ source <(fzf --zsh)
 
 # Personal commands for different companies
 [ -f ~/.personal.zsh ] && source ~/.personal.zsh
+
+{{- if (lookPath "docker") }}
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/portless/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions
+{{- end }}
