@@ -184,9 +184,9 @@ vimcmd_visual_symbol = '[](bold fg:color_yellow)'
 
 [git_metrics]
 disabled = false
-added_style = "fg:color_green bg:color_aqua"
-deleted_style = "fg:color_red bg:color_aqua"
-format = '([( +$added)](fg:color_green bg:color_aqua)[( -$deleted) ](fg:color_red bg:color_aqua))'
+added_style = "bold fg:color_fg0 bg:color_aqua"
+deleted_style = "bold fg:color_fg0 bg:color_aqua"
+format = '([( +$added)](bold fg:color_fg0 bg:color_aqua)[( -$deleted) ](bold fg:color_fg0 bg:color_aqua))'
 
 [package]
 symbol = "󰏗 "
