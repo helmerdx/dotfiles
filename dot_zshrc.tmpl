@@ -144,7 +144,6 @@ plugins=(
     sudo
     terraform
     tmux
-    volta
     zsh-better-npm-completion
     zsh-autosuggestions
     zsh-vi-mode
@@ -332,16 +331,27 @@ ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# Volta configuration
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
-
 # Starship
 eval "$(starship init zsh)"
 
 # FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source <(fzf --zsh)
+
+# Mise (tool version manager — global Node set in ~/.config/mise/config.toml)
+if exist mise; then
+  eval "$(mise activate zsh)"
+fi
+
+# Direnv (per-directory env vars via .envrc)
+if exist direnv; then
+  eval "$(direnv hook zsh)"
+fi
+
+# Zoxide (smarter cd — use 'z <dir>' instead of 'cd <dir>')
+if exist zoxide; then
+  eval "$(zoxide init zsh)"
+fi
 
 # Personal commands for different companies
 [ -f ~/.personal.zsh ] && source ~/.personal.zsh
