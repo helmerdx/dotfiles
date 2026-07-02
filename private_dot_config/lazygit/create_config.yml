@@ -1,8 +1,10 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/jesseduffield/lazygit/master/schema/config.json
 git:
-  paging:
-    colorArg: always
-    pager: diff-so-fancy
+  pagers:
+    - colorArg: always
+      pager: diff-so-fancy
+    - colorArg: always
+      pager: delta --paging=never --light
   # Uncomment the following line to enable commitPrefixes
   # commitPrefixes:
   #   pills:

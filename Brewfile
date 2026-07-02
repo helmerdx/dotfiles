@@ -18,6 +18,7 @@ brew "curl"
 brew "ctags"
 brew "cmake" # Required for tmux plugins
 brew "diff-so-fancy"
+brew "git-delta"
 brew "direnv"
 brew "eza"
 brew "fd"
