@@ -1,0 +1,35 @@
+{{ $sshKey := joinPath .chezmoi.homeDir ".ssh" "id_ed25519.pub" -}}
+[user]
+	name = Helmer
+	email = 11061182+helmerdavila@users.noreply.github.com
+{{- if stat $sshKey }}
+	signingkey = {{ $sshKey }}
+[gpg]
+	format = ssh
+[commit]
+	gpgsign = true
+{{ end -}}
+[core]
+	pager = diff-so-fancy | less --tabs=4 -RFX
+	excludesfile = {{ .chezmoi.homeDir }}/.config/git/gitignore_global
+[color "diff-highlight"]
+    oldNormal = red bold
+    oldHighlight = red bold 224
+    newNormal = green bold
+    newHighlight = green bold 194
+[color "diff"]
+    meta = 11
+    frag = black bold
+    old = red bold
+    new = green bold
+    whitespace = red reverse
+[interactive]
+	diffFilter = diff-so-fancy --patch
+[diff]
+	colorMoved = default
+[pull]
+	rebase = true
+[color]
+    ui = true
+[include]
+	path = ~/.gitconfig.local
