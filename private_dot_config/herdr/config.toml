@@ -1,0 +1,69 @@
+onboarding = false
+
+[terminal]
+default_shell = "/bin/zsh"
+shell_mode = "auto"
+new_cwd = "follow"
+
+[theme]
+name = "tokyo-night-day"
+
+[ui]
+mouse_capture = true
+pane_borders = true
+pane_gaps = true
+confirm_close = true
+prompt_new_tab_name = true
+accent = "purple"
+show_agent_labels_on_pane_borders = true
+
+[ui.toast]
+delivery = "terminal"
+delay_seconds = 1
+
+[ui.sound]
+enabled = true
+
+[advanced]
+scrollback_limit_bytes = 52428800 # ~50MB, similar idea to tmux history-limit 50000
+
+[session]
+resume_agents_on_restore = true
+
+[experimental]
+pane_history = false
+
+[keys]
+# tmux muscle memory
+prefix = "ctrl+space"
+
+new_tab = "prefix+c"
+switch_tab = "prefix+1..9"
+
+split_vertical = "prefix+v"
+split_horizontal = "prefix+minus"  # tmux: prefix + -
+
+# Herdr equivalent to your H/J/K/L resize workflow:
+resize_mode = "prefix+r"
+
+swap_pane_left = "prefix+shift+h"
+swap_pane_down = "prefix+shift+j"
+swap_pane_up = "prefix+shift+k"
+swap_pane_right = "prefix+shift+l"
+
+close_pane = "prefix+x"
+zoom = "prefix+z"
+copy_mode = "prefix+y"
+
+workspace_picker = "prefix+w"
+goto = "prefix+f"
+toggle_sidebar = "prefix+b"
+detach = "prefix+q"
+
+focus_pane_left = ["prefix+h", "ctrl+alt+h"]
+focus_pane_down = ["prefix+j", "ctrl+alt+j"]
+focus_pane_up = ["prefix+k", "ctrl+alt+k"]
+focus_pane_right = ["prefix+l", "ctrl+alt+l"]
+
+next_tab = ["prefix+n", "ctrl+alt+]"]
+previous_tab = ["prefix+p", "ctrl+alt+["]
