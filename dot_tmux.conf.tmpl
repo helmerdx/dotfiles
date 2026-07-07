@@ -57,7 +57,7 @@ bind < swap-pane -U
 bind > swap-pane -D
 
 # Bindings for copy mode
-bind v copy-mode
+bind y copy-mode
 bind -T copy-mode-vi v send -X begin-selection
 bind -T copy-mode-vi C-v send -X rectangle-toggle
 bind -T copy-mode-vi y send -X copy-selection-and-cancel
@@ -71,7 +71,7 @@ bind-key -T copy-mode-vi 'v' send -X begin-selection
 bind-key -T copy-mode-vi 'y' send -X copy-selection
 
 # Custom bindings
-bind-key | split-window -h -c "#{pane_current_path}"
+bind-key v split-window -h -c "#{pane_current_path}"
 bind-key - split-window -v -c "#{pane_current_path}"
 bind-key r source-file ~/.tmux.conf \; display-message "Config reloaded"
 bind C-l send-keys 'C-l'
