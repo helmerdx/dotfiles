@@ -6,7 +6,6 @@ GREEN="\033[1;32m"
 NOCOLOR="\033[0m"
 CARGO_PATH="{{ .chezmoi.homeDir }}/.cargo/bin"
 APPS_PATH="{{ .linux.appsPath }}"
-NVIM_VERSION="v0.9.4"
 
 function exist() {
   command -v "$1" >/dev/null 2>&1
@@ -145,7 +144,7 @@ if ! exist lazygit; then
   sudo install lazygit /usr/local/bin
 fi
 
-if [ ! exist nvim ] && [ ! -f /usr/local/bin/nvim ]; then
+if ! exist nvim && [ ! -f /usr/local/bin/nvim ]; then
   sudo nala install -y cmake gettext ninja-build
   cd {{ .linux.neovimSource }}
   make CMAKE_BUILD_TYPE=Release
@@ -219,7 +218,7 @@ if ! exist htop; then
 fi
 
 if ! exist nvim; then
-  sudo pacman -S --no-confirm neovim
+  sudo pacman -S --noconfirm neovim
 fi
 
 if ! exist lazygit; then

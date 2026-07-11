@@ -48,21 +48,23 @@ chezmoi init --ssh --apply helmerdavila
 ### Tools
 
 - Chezmoi
-- Zsh
-- Oh my zsh
-- Vim plug
+- Zsh (Oh My Zsh)
+- Starship prompt
+- Tmux
+- Neovim, Vim plug
 - `~/.vimrc` file
 - `~/.ideavimrc` file (used for Jetbrains)
 - `~/.tmux.conf` file
-- `~/.config/alacritty/alacritty.yml` file
+- Terminal configs: Kitty, Ghostty, Alacritty
+- mise (runtime version manager)
+- Lazygit, Lazydocker
+- Herdr
 
 ### Extras
 
-- Exa
-- NVM
-- Alacritty
-- Ripgrep
-- Bat
+- Ripgrep, fd, bat, eza, fzf, zoxide
+- git-delta, diff-so-fancy
+- Nerd Fonts (Caskaydia Cove, Fantasque Sans Mono, Fira Code, Intel One Mono, JetBrains Mono, Recursive Mono, Victor Mono)
 
 ## Creating an ~/.nvimrc (Custom Neovim) and ~/.ovimrc (Custom Original Vim)
 
