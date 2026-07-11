@@ -2,3 +2,23 @@
 .DS_Store
 .claude/settings.local.json
 CLAUDE.local.md
+
+# Secrets and machine-local credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+credentials.json
+credentials.yaml
+credentials.yml
+credentials.toml
+secrets.json
+secrets.yaml
+secrets.yml
+secrets.toml
+id_rsa
+id_ed25519
+id_ecdsa
