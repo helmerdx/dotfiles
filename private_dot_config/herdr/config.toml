@@ -60,7 +60,7 @@ zoom = "prefix+z"
 copy_mode = "prefix+y"
 
 workspace_picker = "prefix+w"
-goto = "prefix+f"
+goto = "prefix+g"
 toggle_sidebar = "prefix+b"
 detach = "prefix+q"
 
