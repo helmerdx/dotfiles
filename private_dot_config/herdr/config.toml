@@ -60,10 +60,34 @@ goto = "prefix+f"
 toggle_sidebar = "prefix+b"
 detach = "prefix+q"
 
-focus_pane_left = ["prefix+h", "ctrl+alt+h"]
-focus_pane_down = ["prefix+j", "ctrl+alt+j"]
-focus_pane_up = ["prefix+k", "ctrl+alt+k"]
-focus_pane_right = ["prefix+l", "ctrl+alt+l"]
+focus_pane_left = ["ctrl+alt+h"]
+focus_pane_down = ["ctrl+alt+j"]
+focus_pane_up = ["ctrl+alt+k"]
+focus_pane_right = ["ctrl+alt+l"]
+
+[[keys.command]]
+key = "ctrl+h"
+type = "plugin_action"
+command = "vim-herdr-navigation.left"
+description = "navigate left (vim/herdr)"
+
+[[keys.command]]
+key = "ctrl+j"
+type = "plugin_action"
+command = "vim-herdr-navigation.down"
+description = "navigate down (vim/herdr)"
+
+[[keys.command]]
+key = "ctrl+k"
+type = "plugin_action"
+command = "vim-herdr-navigation.up"
+description = "navigate up (vim/herdr)"
+
+[[keys.command]]
+key = "ctrl+l"
+type = "plugin_action"
+command = "vim-herdr-navigation.right"
+description = "navigate right (vim/herdr)"
 
 next_tab = ["prefix+n", "ctrl+alt+]"]
 previous_tab = ["prefix+p", "ctrl+alt+["]

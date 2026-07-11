@@ -5,6 +5,7 @@ let g:coc_global_extensions = [
       \ 'coc-lists',
       \ 'coc-eslint'
       \]
+let g:tmux_navigator_no_mappings = 1
 
 " VimPlug
 call plug#begin()
@@ -66,6 +67,8 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'mhinz/vim-signify'
 
 call plug#end()
+
+execute 'source ' . fnameescape(expand('~/.local/share/herdr/plugins/vim-herdr-navigation/editor/vim.vim'))
 
 if &term =~ '256color'
   " disable Background Color Erase (BCE) so that color schemes
@@ -144,12 +147,6 @@ nmap <leader>uw :set wrap!<cr>
 
 " Source Vim configuration file and install plugins
 nnoremap <silent><leader>9 :source ~/.vimrc<CR>
-
-" Movement maps
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
 
 " Tab maps
 map <leader><tab>x :tabclose<cr>
@@ -259,4 +256,3 @@ let g:rg_derive_root='true'
 " Start NERDTree when Vim is started without file arguments.
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
-

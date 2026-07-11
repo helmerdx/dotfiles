@@ -1,0 +1,19 @@
+#!/bin/sh
+set -eu
+
+plugin_dir="{{ .chezmoi.homeDir }}/.local/share/herdr/plugins/vim-herdr-navigation"
+plugin_id="vim-herdr-navigation"
+
+if ! command -v herdr >/dev/null 2>&1; then
+  echo "Skipping ${plugin_id}: herdr >= 0.7.0 is not installed." >&2
+  exit 0
+fi
+
+if [ ! -f "$plugin_dir/herdr-plugin.toml" ]; then
+  echo "${plugin_id} checkout is missing at $plugin_dir." >&2
+  exit 1
+fi
+
+if ! herdr plugin action list --plugin "$plugin_id" | jq -e '.result.actions | length > 0' >/dev/null 2>&1; then
+  herdr plugin link "$plugin_dir"
+fi
