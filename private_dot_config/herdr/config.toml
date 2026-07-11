@@ -21,8 +21,8 @@ accent = "purple"
 show_agent_labels_on_pane_borders = true
 
 [ui.toast]
-delivery = "terminal"
-delay_seconds = 1
+delivery = "system"
+delay_seconds = 5
 
 [ui.sound]
 enabled = true
@@ -42,6 +42,7 @@ prefix = "ctrl+space"
 
 new_tab = "prefix+c"
 switch_tab = "prefix+1..9"
+focus_agent = "prefix+alt+1..9"
 
 split_vertical = "prefix+v"
 split_horizontal = "prefix+minus"  # tmux: prefix + -
