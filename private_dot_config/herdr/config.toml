@@ -43,6 +43,8 @@ prefix = "ctrl+space"
 new_tab = "prefix+c"
 switch_tab = "prefix+1..9"
 focus_agent = "prefix+alt+1..9"
+next_tab = ["prefix+n", "ctrl+alt+]"]
+previous_tab = ["prefix+p", "ctrl+alt+["]
 
 split_vertical = "prefix+v"
 split_horizontal = "prefix+minus"  # tmux: prefix + -
@@ -92,6 +94,3 @@ key = "ctrl+l"
 type = "plugin_action"
 command = "vim-herdr-navigation.right"
 description = "navigate right (vim/herdr)"
-
-next_tab = ["prefix+n", "ctrl+alt+]"]
-previous_tab = ["prefix+p", "ctrl+alt+["]
