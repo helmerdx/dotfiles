@@ -34,19 +34,19 @@ $time\
 $cmd_duration\
 $line_break$character"""
 
-palette = 'kaolin_breeze'
+palette = 'gruvbox_dark'
 
-[palettes.kaolin_breeze]
-color_fg0 = '#eff0f1'
-color_bg1 = '#282c34'
-color_bg3 = '#5c6370'
-color_blue = '#61afef'
-color_aqua = '#56b6c2'
-color_green = '#98c379'
-color_orange = '#e06c75'
-color_purple = '#c678dd'
-color_red = '#be5046'
-color_yellow = '#e5c07b'
+[palettes.gruvbox_dark]
+color_fg0 = '#fbf1c7'
+color_bg1 = '#3c3836'
+color_bg3 = '#665c54'
+color_blue = '#458588'
+color_aqua = '#689d6a'
+color_green = '#98971a'
+color_orange = '#d65d0e'
+color_purple = '#b16286'
+color_red = '#cc241d'
+color_yellow = '#d79921'
 
 [os]
 disabled = false
