@@ -335,9 +335,11 @@ ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
 # Starship
 eval "$(starship init zsh)"
 
-# FZF
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-source <(fzf --zsh)
+# FZF (must load after zsh-vi-mode resets keybindings on init - see zsh-vi-mode README)
+function zvm_after_init() {
+  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+  source <(fzf --zsh)
+}
 
 # Mise (tool version manager — global Node set in ~/.config/mise/config.toml)
 if exist mise; then
