@@ -46,6 +46,7 @@ brew "vim"
 brew "wget"
 brew "yq"
 brew "zsh"
+brew "rust"
 brew "rustup"
 brew "zoxide"
 

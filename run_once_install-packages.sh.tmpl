@@ -304,4 +304,9 @@ if exist bat; then
 fi
 
 brew bundle --file {{ joinPath .chezmoi.homeDir "Brewfile" | quote }}
+
+if exist rustup; then
+  print_msg "Ensuring a default Rust toolchain is set"
+  rustup default stable
+fi
 {{- end }}
