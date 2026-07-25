@@ -131,15 +131,15 @@
       "commands": ["bookmarks.toggle"]
     },
     {
-      "before": ["g", "z", "d"],
+      "before": ["g", "s", "d"],
       "after": ["d", "s"]
     },
     {
-      "before": ["g", "z", "r"],
+      "before": ["g", "s", "r"],
       "after": ["c", "s"]
     },
     {
-      "before": ["g", "z", "a"],
+      "before": ["g", "s", "a"],
       "after": ["y", "s"]
     },
     // Same file: Navigation
@@ -201,7 +201,7 @@
   ],
   "vim.visualModeKeyBindings": [
     {
-      "before": ["g", "z", "a"],
+      "before": ["g", "s", "a"],
       "after": ["S"]
     },
     {

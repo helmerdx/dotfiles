@@ -63,10 +63,10 @@ let g:NERDTreeMapOpenSplit="S"
 :map <leader>cf <Action>(ReformatCode)
 :map <leader>cr <Action>(RenameElement)
 :nmap <leader>mm <Action>(ToggleBookmark)
-:nmap gzd <Plug>DSurround
-:nmap gzr <Plug>CSurround
-:nmap gza <Plug>YSurround
-:vmap gza <Plug>VSurround
+:nmap gsd <Plug>DSurround
+:nmap gsr <Plug>CSurround
+:nmap gsa <Plug>YSurround
+:vmap gsa <Plug>VSurround
 
 """ Same file: Navigation
 :map <leader>sb <Action>(Find)

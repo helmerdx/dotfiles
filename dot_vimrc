@@ -202,10 +202,10 @@ map <leader>e :NERDTreeToggle<cr>
 map <leader>E :NERDTreeFind<cr>
 
 " Surround remaps
-nmap gzd <Plug>DSurround
-nmap gzr <Plug>CSurround
-nmap gza <Plug>YSurround
-vmap gzd <Plug>DSurround
+nmap gsd <Plug>DSurround
+nmap gsr <Plug>CSurround
+nmap gsa <Plug>YSurround
+vmap gsa <Plug>YSurround
 
 " Fzf config
 " Search files
