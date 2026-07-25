@@ -20,11 +20,11 @@ return {
     config = function()
       -- Neovim auto-detects the terminal's light/dark background into
       -- vim.o.background; alabaster needs style set explicitly to match.
-      require("alabaster").setup({ style = vim.o.background })
+      require("alabaster").setup({ style = vim.o.background, transparent = true })
       vim.api.nvim_create_autocmd("OptionSet", {
         pattern = "background",
         callback = function()
-          require("alabaster").setup({ style = vim.o.background })
+          require("alabaster").setup({ style = vim.o.background, transparent = true })
           vim.cmd.colorscheme("alabaster")
         end,
       })
