@@ -172,13 +172,18 @@ export PATH=$HOME/.composer/vendor/bin:$PATH
 
 fpath+=${ZSH_CUSTOM:-${ZSH}/custom}/plugins/zsh-completions/src
 
-source $ZSH/oh-my-zsh.sh
-
 # cht.sh completion
 # Install (and create file) with curl https://cht.sh/:cht.sh > "$HOME/bin/cht.sh"
 # and then chmod +x "$HOME/bin/cht.sh"
 # Create a file in ~/.zsh.d/_cht
 fpath=(~/.zsh.d/ $fpath)
+
+{{- if (lookPath "docker") }}
+# Docker CLI completions
+fpath=({{ .chezmoi.homeDir }}/.docker/completions $fpath)
+{{- end }}
+
+source $ZSH/oh-my-zsh.sh
 
 
 function npm_ci_install {
@@ -358,11 +363,3 @@ fi
 
 # Personal commands for different companies
 [ -f ~/.personal.zsh ] && source ~/.personal.zsh
-
-{{- if (lookPath "docker") }}
-# The following lines have been added by Docker Desktop to enable Docker CLI completions.
-fpath=(/Users/portless/.docker/completions $fpath)
-autoload -Uz compinit
-compinit
-# End of Docker CLI completions
-{{- end }}
