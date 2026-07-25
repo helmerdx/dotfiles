@@ -51,7 +51,7 @@ keybind = super+b>9=goto_tab:9
 
 # splitting
 # | current does not work
-keybind = super+b>\=new_split:right
+keybind = super+b>v=new_split:right
 keybind = super+b>-=new_split:down
 keybind = super+b>e=equalize_splits
 
