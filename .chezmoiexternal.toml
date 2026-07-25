@@ -10,6 +10,10 @@
     type = "git-repo"
     url = "https://github.com/zdharma-continuum/fast-syntax-highlighting.git"
     refreshPeriod = "168h"
+[".oh-my-zsh/custom/plugins/fzf-tab"]
+    type = "git-repo"
+    url = "https://github.com/Aloxaf/fzf-tab.git"
+    refreshPeriod = "168h"
 [".oh-my-zsh/custom/plugins/zsh-aliases-eza"]
     type = "git-repo"
     url = "https://github.com/DarrinTisdale/zsh-aliases-exa.git"
