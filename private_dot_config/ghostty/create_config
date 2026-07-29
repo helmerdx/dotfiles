@@ -15,6 +15,10 @@ cursor-style-blink = false
 macos-option-as-alt = right
 shell-integration-features = no-cursor
 
+# Herdr (mouse_capture = true) already opens URLs on click for its own mouse UI.
+# Disabling Ghostty's own URL click here avoids double-opening links inside Herdr panes.
+link-url = false
+
 confirm-close-surface = false
 window-decoration = true
 window-padding-x = 10
