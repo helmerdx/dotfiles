@@ -1,0 +1,4 @@
+interface:
+  display_name: "Global Commit Changes"
+  short_description: "Commit changes, push, and manage pull requests"
+  default_prompt: "Use $commit-global to group my changes into logical commits and handle the pull request."
