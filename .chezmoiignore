@@ -1,11 +1,11 @@
 readme.md
 .gitignore
 docker-compose.yml
-/.docker
+.docker
 CLAUDE.md
-/.github
+.github
 skills-lock.json
-/.copilot-skills
+.copilot-skills
 
 # ignore oh-my-zsh cache
 .oh-my-zsh/cache/.zsh-update
