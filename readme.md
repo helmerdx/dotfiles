@@ -85,6 +85,24 @@ treehouse init
 
 The generated `treehouse.toml` is intentionally ignored and remains local to the project.
 
+## Global skills
+
+The global skill lock file is tracked as `dot_agents/dot_skill-lock.json` and deployed to `~/.agents/.skill-lock.json`. After installing or updating a global skill, sync the complete live lock file back into the repository so other skills remain tracked:
+
+```bash
+chezmoi re-add ~/.agents/.skill-lock.json
+```
+
+## Herdr setup
+
+After installing Herdr on a new computer, run the following to install the configured plugins and integrations:
+
+```bash
+herdrinstall
+```
+
+The function installs `kryptamine/herdr-auto-title`, `levi-qiao/herdr-agent-quota`, and all supported Herdr integrations listed by the CLI. It returns a failure status if any individual installation fails.
+
 ## Creating an ~/.nvimrc (Custom Neovim) and ~/.ovimrc (Custom Original Vim)
 
 Chezmoi will create the file when you start it the first time. Make sure the content is nearly similar to the next file contents
