@@ -66,6 +66,25 @@ chezmoi init --ssh --apply helmerdavila
 - git-delta, diff-so-fancy
 - Nerd Fonts (Caskaydia Cove, Fantasque Sans Mono, Fira Code, Intel One Mono, JetBrains Mono, Recursive Mono, Victor Mono)
 
+## Treehouse
+
+Treehouse manages reusable Git worktrees for parallel agent sessions. Its project configuration file, `treehouse.toml`, is ignored globally by `~/.config/git/gitignore_global`.
+
+The `.gitconfig` in this repository already points Git at that global ignore file. Apply both files after installing or updating the dotfiles:
+
+```bash
+chezmoi apply ~/.gitconfig ~/.config/git/gitignore_global
+git config --global --get core.excludesfile
+```
+
+To create a local Treehouse project configuration, run:
+
+```bash
+treehouse init
+```
+
+The generated `treehouse.toml` is intentionally ignored and remains local to the project.
+
 ## Creating an ~/.nvimrc (Custom Neovim) and ~/.ovimrc (Custom Original Vim)
 
 Chezmoi will create the file when you start it the first time. Make sure the content is nearly similar to the next file contents
