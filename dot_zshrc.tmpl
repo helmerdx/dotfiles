@@ -289,6 +289,67 @@ alias th="treehouse"
 alias ths="treehouse status"
 alias the="treehouse enter"
 # --
+# Treehouse + Herdr worktree tab
+function treehouse_herdr_tab {
+  local name="$1"
+  if [[ -z "$name" ]]; then
+    echo "usage: thw <name>" >&2
+    return 1
+  fi
+  if ! exist treehouse || ! exist herdr || ! exist jq; then
+    echo "thw: requires treehouse, herdr, and jq" >&2
+    return 1
+  fi
+  if [[ -z "$HERDR_WORKSPACE_ID" ]]; then
+    echo "thw: must be run from inside a herdr pane" >&2
+    return 1
+  fi
+
+  local worktree_path
+  worktree_path=$(treehouse get --lease --lease-holder="thw:$name") || return 1
+
+  local tab_json root_pane right_pane
+  tab_json=$(herdr tab create --workspace "$HERDR_WORKSPACE_ID" --cwd "$worktree_path" --label "🌳 $name" --focus) || return 1
+  root_pane=$(jq -r '.result.root_pane.pane_id' <<< "$tab_json")
+
+  right_pane=$(herdr pane split --pane "$root_pane" --direction right --ratio 0.5 --cwd "$worktree_path" | jq -r '.result.pane.pane_id') || return 1
+  herdr pane split --pane "$right_pane" --direction down --ratio 0.5 --cwd "$worktree_path" >/dev/null
+}
+
+alias thw=treehouse_herdr_tab
+
+# Close the tab and drop its worktree - run from any pane inside it once you're done.
+# Refuses (and leaves the tab open) if the worktree has uncommitted/unmerged work.
+function treehouse_herdr_tab_done {
+  if ! exist treehouse || ! exist herdr; then
+    echo "thwd: requires treehouse and herdr" >&2
+    return 1
+  fi
+  if [[ -z "$HERDR_TAB_ID" ]]; then
+    echo "thwd: must be run from inside a herdr pane" >&2
+    return 1
+  fi
+
+  local worktree_path
+  worktree_path=$(git rev-parse --show-toplevel 2>/dev/null) || {
+    echo "thwd: not inside a git worktree" >&2
+    return 1
+  }
+
+  cd "$HOME" || return 1
+  if ! treehouse destroy "$worktree_path" --include-leased --include-in-use --yes; then
+    echo "thwd: treehouse left the worktree in place (likely uncommitted/unmerged work) - tab stays open" >&2
+    return 1
+  fi
+
+  # destroying the worktree kills its panes' processes, which herdr already
+  # closes the tab for on its own - this is a best-effort fallback, not an error if it's gone
+  herdr tab close "$HERDR_TAB_ID" >/dev/null 2>&1
+  return 0
+}
+
+alias thwd=treehouse_herdr_tab_done
+# --
 # Herdr plugins and integrations
 function herdr_install_all {
   local install_status=0 integration
