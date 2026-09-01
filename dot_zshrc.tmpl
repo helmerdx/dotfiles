@@ -284,6 +284,27 @@ alias cup="composer outdated --outdated --direct"
 alias fzfbl="fzf --preview 'bat --theme=Catppuccin-latte --style=numbers --color=always --line-range :500 {}'"
 alias fzfbd="fzf --preview 'bat --theme=Catppuccin-frappe --style=numbers --color=always --line-range :500 {}'"
 # --
+# Treehouse aliases
+alias th="treehouse"
+alias ths="treehouse status"
+alias the="treehouse enter"
+# --
+# Herdr plugins and integrations
+function herdr_install_all {
+  local install_status=0 integration
+
+  herdr plugin install --yes kryptamine/herdr-auto-title || install_status=1
+  herdr plugin install --yes https://github.com/levi-qiao/herdr-agent-quota || install_status=1
+
+  for integration in pi omp claude codex copilot devin droid kimi opencode kilo hermes qodercli qwen cursor mastracode antigravity-cli grok; do
+    herdr integration install "$integration" || install_status=1
+  done
+
+  return "$install_status"
+}
+
+alias herdrinstall=herdr_install_all
+# --
 # Kitty aliases
 alias kittyl2="kitty +kitten themes --reload-in=all Modus Operandi Tinted"
 alias kittyl="kitty +kitten themes --reload-in=all Rosé Pine Dawn"

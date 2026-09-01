@@ -1,0 +1,6 @@
+# Global tool and project-local files
+mise.toml
+.no-mistakes.yaml
+
+# Treehouse project configuration
+treehouse.toml

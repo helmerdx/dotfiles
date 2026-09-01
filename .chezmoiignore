@@ -3,6 +3,7 @@ readme.md
 docker-compose.yml
 .docker
 CLAUDE.md
+AGENTS.md
 .github
 skills-lock.json
 .copilot-skills
