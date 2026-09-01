@@ -6,10 +6,8 @@ shell_mode = "auto"
 new_cwd = "follow"
 
 [theme]
-name = "rose-pine"
+name = "solarized"
 auto_switch = true
-light_name = "rose-pine-dawn"
-dark_name = "rose-pine"
 
 [ui]
 mouse_capture = true
