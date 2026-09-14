@@ -136,6 +136,7 @@ plugins=(
     gh
     git
     gpg-agent
+    herdr
     jsontools
     macos
     npm
@@ -445,3 +446,6 @@ fi
 
 # Personal commands for different companies
 [ -f ~/.personal.zsh ] && source ~/.personal.zsh
+
+# sentry
+fpath=("{{ .chezmoi.homeDir }}/.local/share/zsh/site-functions" $fpath)
