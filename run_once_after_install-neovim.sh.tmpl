@@ -3,15 +3,20 @@
 {{- if (eq .chezmoi.os "linux") }}
 {{-   if (or (eq .chezmoi.osRelease.id "ubuntu") (eq .chezmoi.osRelease.id "linuxmint")) }}
 
-# Copy neovim binary to /usr/local/bin
-if [ -f "$HOME/.neovim/bin/nvim" ]; then
-    echo "Installing neovim to /usr/local/bin/nvim..."
-    sudo cp "$HOME/.neovim/bin/nvim" /usr/local/bin/nvim
-    sudo chmod +x /usr/local/bin/nvim
-    echo "Neovim installed successfully!"
-else
-    echo "Neovim binary not found at $HOME/.neovim/bin/nvim"
+set -eu
+
+neovim_binary={{ joinPath .linux.neovimSource "bin/nvim" | quote }}
+
+if [ ! -x "$neovim_binary" ]; then
+    echo "Neovim executable not found at $neovim_binary" >&2
+    exit 1
 fi
+
+# Keep the binary beside the archive's bundled libraries and runtime files.
+echo "Linking Neovim to /usr/local/bin/nvim..."
+sudo mkdir -p /usr/local/bin
+sudo ln -sfn "$neovim_binary" /usr/local/bin/nvim
+echo "Neovim installed successfully!"
 
 {{-   end }}
 {{- end }}

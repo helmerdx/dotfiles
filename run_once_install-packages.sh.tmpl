@@ -144,15 +144,7 @@ if ! exist lazygit; then
   sudo install lazygit /usr/local/bin
 fi
 
-if ! exist nvim && [ ! -f /usr/local/bin/nvim ]; then
-  sudo nala install -y cmake gettext ninja-build
-  cd {{ .linux.neovimSource }}
-  make CMAKE_BUILD_TYPE=Release
-  make install
-  cd {{ .chezmoi.homeDir }}
-else
-  print_msg "Neovim already installed"
-fi
+# The prebuilt Neovim archive is linked by run_once_after_install-neovim.sh.
 
 install_volta
 
