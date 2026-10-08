@@ -16,6 +16,9 @@ sudo apt install nala -y
 if ! exist git; then
   sudo nala install -y git
 fi
+if ! exist zsh; then
+  sudo nala install -y zsh
+fi
 if ! exist unzip; then
   sudo nala install -y unzip
 fi
@@ -34,12 +37,18 @@ fi
 if ! exist git; then
   sudo pacman -S --noconfirm git
 fi
+if ! exist zsh; then
+  sudo pacman -S --noconfirm zsh
+fi
 if ! exist wget; then
   sudo pacman -S --noconfirm wget
 fi
 {{-   else if eq .chezmoi.osRelease.id "fedora" }}
 if ! exist git; then
   sudo dnf install -y git
+fi
+if ! exist zsh; then
+  sudo dnf install -y zsh
 fi
 if ! exist unzip; then
   sudo dnf install -y unzip

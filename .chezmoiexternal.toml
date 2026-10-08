@@ -1,4 +1,4 @@
-# oh-my-zsh custom plugins (OMZ itself is installed via run_once_install-omz.sh and self-updates)
+# oh-my-zsh custom plugins (OMZ itself is installed via run_once_before_install-omz.sh and self-updates)
 [".local/share/herdr/plugins/vim-herdr-navigation"]
     type = "git-repo"
     url = "https://github.com/paulbkim-dev/vim-herdr-navigation.git"
