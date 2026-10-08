@@ -1,7 +1,8 @@
 #!/bin/bash
+set -eu
 
 # This script runs whenever lazy-lock.json changes
-# It installs/updates Neovim plugins to match the lockfile
+# It restores Neovim plugins to the versions in the lockfile.
 
 {{- if (eq .chezmoi.os "linux") }}
 {{-   if (or (eq .chezmoi.osRelease.id "ubuntu") (eq .chezmoi.osRelease.id "linuxmint")) }}
@@ -10,7 +11,7 @@
 
 if command -v nvim &> /dev/null; then
     echo "Syncing Neovim plugins with lazy-lock.json..."
-    nvim --headless "+Lazy! install" +qa
+    nvim --headless "+Lazy! restore" +qa
     echo "Neovim plugins synced successfully!"
 else
     echo "Warning: nvim not found in PATH, skipping plugin sync"
@@ -23,7 +24,7 @@ fi
 
 if command -v nvim &> /dev/null; then
     echo "Syncing Neovim plugins with lazy-lock.json..."
-    nvim --headless "+Lazy! install" +qa
+    nvim --headless "+Lazy! restore" +qa
     echo "Neovim plugins synced successfully!"
 else
     echo "Warning: nvim not found in PATH, skipping plugin sync"
