@@ -397,10 +397,32 @@ alias pint='[ -f pint ] && bash pint || bash vendor/bin/pint'
 alias art="php artisan"
 
 {{- if (eq .chezmoi.os "linux") }}
-# Openvpn aliases
-alias vpnimport="openvpn3 config-import --config $1 --name $2"
-alias vpnstart="openvpn3 session-start --config $1"
-alias vpnstop="openvpn3 session-manage --disconnect --config $1"
+# OpenVPN commands
+unalias vpnimport vpnstart vpnstop 2>/dev/null || true
+
+function vpnimport() {
+  if (( $# != 2 )); then
+    echo "usage: vpnimport <config-file> <name>" >&2
+    return 1
+  fi
+  openvpn3 config-import --config "$1" --name "$2"
+}
+
+function vpnstart() {
+  if (( $# != 1 )); then
+    echo "usage: vpnstart <name>" >&2
+    return 1
+  fi
+  openvpn3 session-start --config "$1"
+}
+
+function vpnstop() {
+  if (( $# != 1 )); then
+    echo "usage: vpnstop <name>" >&2
+    return 1
+  fi
+  openvpn3 session-manage --disconnect --config "$1"
+}
 {{-   if (or (eq .chezmoi.osRelease.id "ubuntu") (eq .chezmoi.osRelease.id "linuxmint")) }}
 # Should be only WSL here
 alias pbcopy="clip.exe"
