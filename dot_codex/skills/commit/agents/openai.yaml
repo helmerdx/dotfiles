@@ -1,4 +1,4 @@
 interface:
   display_name: "Commit Changes"
-  short_description: "Commit changes, push, and manage pull requests"
-  default_prompt: "Use $commit to group my changes into logical commits and handle the pull request."
+  short_description: "Review commits and confirm before committing or pushing"
+  default_prompt: "Use $commit to group my changes into logical commits, show an interactive confirmation, and carry out only the actions I approve."
