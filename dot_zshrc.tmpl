@@ -450,7 +450,7 @@ function zvm_after_init() {
   source <(fzf --zsh)
 }
 
-# Mise (tool version manager — global Node set in ~/.config/mise/config.toml)
+# Mise (tool version manager; global defaults in ~/.config/mise/config.toml)
 if exist mise; then
   eval "$(mise activate zsh)"
 fi
