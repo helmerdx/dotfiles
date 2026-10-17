@@ -1,4 +1,4 @@
 interface:
   display_name: "Commit Changes"
-  short_description: "Review commits and confirm before committing or pushing"
-  default_prompt: "Use $commit to group my changes into logical commits, show an interactive confirmation, and carry out only the actions I approve."
+  short_description: "Confirm commits, push, and optional ready or draft PR"
+  default_prompt: "Use $commit to group my changes into logical commits and show an approval dialog with commit and push first, local-only commits, and ready or draft PR options when supported. Carry out only my approved plan."
