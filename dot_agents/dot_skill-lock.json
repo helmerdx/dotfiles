@@ -404,6 +404,25 @@
       "skillFolderHash": "759f1e56d0d2fdd3819d2a53b81e72767c08d914",
       "installedAt": "2026-09-11T18:11:27.535Z",
       "updatedAt": "2026-10-07T18:34:00.833Z"
+    },
+    "frontend-design": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/anthropics/skills.git",
+      "skillPath": "skills/frontend-design/SKILL.md",
+      "skillFolderHash": "d79e2a5bb4df4a386c2adcdd9ab8709bba28c3f6",
+      "pluginName": "example-skills",
+      "installedAt": "2026-10-25T23:57:11.822Z",
+      "updatedAt": "2026-10-25T23:57:11.822Z"
+    },
+    "diagram-design": {
+      "source": "cathrynlavery/diagram-design",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/cathrynlavery/diagram-design.git",
+      "skillPath": "skills/diagram-design/SKILL.md",
+      "skillFolderHash": "bcecaf90a9082b1820d32c9416665bec0d9d713e",
+      "installedAt": "2026-10-29T01:14:14.644Z",
+      "updatedAt": "2026-10-29T01:14:14.644Z"
     }
   },
   "dismissed": {
@@ -415,15 +434,16 @@
     "codex",
     "cursor",
     "droid",
+    "fx",
     "gemini-cli",
     "github-copilot",
     "kilo",
     "kimi-code-cli",
     "opencode",
+    "pi",
     "warp",
     "zed",
     "claude-code",
-    "hermes-agent",
-    "pi"
+    "hermes-agent"
   ]
 }
