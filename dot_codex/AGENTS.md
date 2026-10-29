@@ -12,3 +12,6 @@
 - Apply that same high standard to engineering excellence: lint, test failures, and test flakiness.
   If you see one, even if it is not caused by what you are working on right now, still get it fixed.
 - Use descriptive variable names, including callback parameters and loop indices (for example: `user`, `response`, `listing`, `element`, `value`, `url`, `index`). Avoid single-letter variable names.
+
+- For every new interface, preserve the user's preferred readable scale for an Apple Studio Display: primary text and form inputs at least 1rem (16px by default), secondary text and labels 14-15px, controls around 48px high, larger headings, and spacious responsive layouts.
+  Verify the desktop layout at 2560x1440 CSS pixels and adapt to smaller screens while keeping primary text readable. Keep exported PDF typography independent of interface scale.
