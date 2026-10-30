@@ -36,6 +36,21 @@ Provide copyable `brew upgrade --formula <approved-names...>` and `brew upgrade 
 
 Preview each proposed command with `HOMEBREW_NO_AUTO_UPDATE=1 brew upgrade --dry-run --formula <approved-names...>` or its `--cask` equivalent. Check for additional dependency or dependent upgrades and surface any skipped underscore targets pulled into the plan. Exclude affected roots from the final command until those additions are reviewed, or explain that no clean selective command is available. Do not use dependency-suppression flags or pin/unpin packages to force the filter. Report preview failures as unverified plans.
 
-Always present the package-by-package summary and proposed commands before any upgrade, then wait for the user to choose or approve the packages. A general request to upgrade or invoke this skill does not approve an unseen package list. Execute only the selection approved from a concrete summary; approval of that selection persists. If targets or additional dependency upgrades change after approval, summarize those changes and obtain approval for the changed selection before execution. State whether any packages were upgraded.
+## Select upgrades
+
+After the summary and command previews, open an actual selection modal with `functions.request_user_input_async` when available. Put the question in `questions[].title` and the actions in `questions[].options`. Identify the package names in each proposed group and refer to the versions already summarized. Offer these actions when applicable:
+
+- `🛡️ Upgrade priorities only (Recommended)`
+- `📦 Upgrade all recommended packages`
+- `🎯 Choose specific packages`
+- `⏸️ Skip upgrades`
+
+The first two actions authorize executing their concrete package lists. Keep skipped and review-needed packages out of both lists. When the groups are identical, offer only one upgrade action. For a custom selection, use a follow-up modal with a numbered candidate list and ask for names, numbers, or exclusions such as `all except bottom`. This is a single-choice dialog with free-text input, not a multi-select checklist. Summarize the resulting exact list and obtain approval in a modal before upgrading it.
+
+Re-run the dry run for the selected subset: removing optional packages can reveal dependent upgrades previously included in the larger plan. If targets or additional dependency upgrades differ from the approved selection, summarize the changes and use a modal to approve the additions or leave the affected packages unchanged. Proceed with unaffected approved packages while a separate dependency choice is pending.
+
+Always present the package-by-package summary before any upgrade. A general request to upgrade or invoke this skill does not approve an unseen package list. Existing approval of a concrete selection persists; ask again only for a changed selection. Silence, a preselected option, and the tool's `accepted: true` response are not approval. Keep the turn open while an asynchronous modal is pending; wait interruptibly in intervals of at most 30 seconds and provide a brief update at least every 60 seconds. Honor cancellation without upgrading unapproved packages.
+
+If this tool is unavailable, use another interactive tool only when its instructions permit approval requests in the active mode. Otherwise ask for the same choice in the final response and explain that a supported modal is unavailable. State whether any packages were upgraded.
 
 Homebrew references: [revision semantics](https://docs.brew.sh/Formula-Cookbook#formulae-revisions), [command reference](https://docs.brew.sh/Manpage).
