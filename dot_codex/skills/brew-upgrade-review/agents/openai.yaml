@@ -1,0 +1,4 @@
+interface:
+  display_name: "Homebrew Upgrade Review"
+  short_description: "Review brew upgrades with evidence for revision fixes"
+  default_prompt: "Use $brew-upgrade-review to check outdated Homebrew packages on my Mac and recommend upgrades, skipping underscore revisions unless there is a documented bug or security fix."
