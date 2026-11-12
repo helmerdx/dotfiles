@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/runkids/skillshare/main/schemas/config.schema.json
+
+# Keep the existing shared collection in place. Codex, Warp, and Zed read
+# this directory directly, so it must not also be configured as a target.
+sources:
+  skills: ~/.agents/skills
+
+# Link individual skills while preserving target-local skills.
+mode: merge
+preserve_tilde_on_save: true
+
+# TWG and other external sources retain ownership of their linked skills.
+follow_source_links: false
+
+targets:
+  claude:
+    skills:
+      path: ~/.claude/skills
+  copilot:
+    skills:
+      path: ~/.copilot/skills
+  cursor:
+    skills:
+      path: ~/.cursor/skills
+  droid:
+    skills:
+      path: ~/.factory/skills
+  gemini:
+    skills:
+      path: ~/.gemini/skills
+  hermes:
+    skills:
+      path: ~/.hermes/skills
+  kilo:
+    skills:
+      path: ~/.kilocode/skills
+  opencode:
+    skills:
+      path: ~/.config/opencode/skills
+  pi:
+    skills:
+      path: ~/.pi/agent/skills
+
+ignore:
+  - .DS_Store
+  - .git/
+  - __pycache__/
+
+audit:
+  block_threshold: CRITICAL

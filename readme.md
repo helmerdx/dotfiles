@@ -87,11 +87,24 @@ The generated `treehouse.toml` is intentionally ignored and remains local to the
 
 ## Global skills
 
-The global skill lock file is tracked as `dot_agents/dot_skill-lock.json` and deployed to `~/.agents/.skill-lock.json`. After installing or updating a global skill, sync the complete live lock file back into the repository so other skills remain tracked:
+Skillshare uses the existing `~/.agents/skills` collection as its source. Its configuration is managed in `private_dot_config/skillshare/config.yaml`; `brew bundle` installs the CLI. Codex, Warp, and Zed read the source directly. Other configured tools receive per-skill links in merge mode, which preserves their local skills. External source links, including TWG skills, remain managed by their existing installers.
+
+```bash
+skillshare status
+skillshare sync --dry-run
+skillshare sync
+skillshare ui
+```
+
+For new skills, use `skillshare install <source>`, then `skillshare sync`. Run `skillshare update <name>` to update skills installed through Skillshare. Back up targets with `skillshare backup` before migrations or forced syncs. The source directory itself is not backed up by target backups.
+
+Existing skills retain their current files and installer ownership; this setup does not import their upstream tracking into Skillshare. The old global lock file is tracked as `dot_agents/dot_skill-lock.json` and deployed to `~/.agents/.skill-lock.json`. After updating an existing skill through its original installer, sync the complete live lock file back into the repository:
 
 ```bash
 chezmoi re-add ~/.agents/.skill-lock.json
 ```
+
+Do not use both installers to update or remove the same skill. Handing an existing skill over to Skillshare requires a backup and an explicit reinstall from its recorded source. The configuration and old lock file do not contain the skill contents; restore or reinstall those separately on a new machine.
 
 ## Herdr setup
 
