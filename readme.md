@@ -98,13 +98,27 @@ skillshare ui
 
 For new skills, use `skillshare install <source>`, then `skillshare sync`. Run `skillshare update <name>` to update skills installed through Skillshare. Back up targets with `skillshare backup` before migrations or forced syncs. The source directory itself is not backed up by target backups.
 
-Existing skills retain their current files and installer ownership; this setup does not import their upstream tracking into Skillshare. The old global lock file is tracked as `dot_agents/dot_skill-lock.json` and deployed to `~/.agents/.skill-lock.json`. After updating an existing skill through its original installer, sync the complete live lock file back into the repository:
+Existing skills retain their current files and installer ownership; syncing links does not import their upstream tracking into Skillshare. Keep both installers' records in chezmoi:
+
+| Installer | Live record | Repository source |
+| --- | --- | --- |
+| Skillshare | `~/.agents/skills/.metadata.json` | `dot_agents/skills/dot_metadata.json` |
+| `npx skills` | `~/.agents/.skill-lock.json` | `dot_agents/dot_skill-lock.json` |
+
+After installing, updating, moving, or removing skills with Skillshare, sync the targets and refresh the complete generated record:
+
+```bash
+skillshare sync -g
+chezmoi re-add ~/.agents/skills/.metadata.json
+```
+
+After changing skills through `npx skills`, refresh its complete generated lock file:
 
 ```bash
 chezmoi re-add ~/.agents/.skill-lock.json
 ```
 
-Do not use both installers to update or remove the same skill. Handing an existing skill over to Skillshare requires a backup and an explicit reinstall from its recorded source. The configuration and old lock file do not contain the skill contents; restore or reinstall those separately on a new machine.
+Let each installer generate its records; preserve unrelated entries when saving them to chezmoi. Keep one installer responsible for updates and removals of each skill. Handing an existing skill over to Skillshare requires a backup and an explicit reinstall from its recorded source. Neither record contains the skill contents; back up custom skill files separately and restore or reinstall skill contents on a new machine.
 
 ## Herdr setup
 
