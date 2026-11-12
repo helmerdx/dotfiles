@@ -355,7 +355,6 @@ alias thwd=treehouse_herdr_tab_done
 function herdr_install_all {
   local install_status=0 integration
 
-  herdr plugin install --yes kryptamine/herdr-auto-title || install_status=1
   herdr plugin install --yes https://github.com/levi-qiao/herdr-agent-quota || install_status=1
 
   for integration in pi omp claude codex copilot devin droid kimi opencode kilo hermes qodercli qwen cursor mastracode antigravity-cli grok; do

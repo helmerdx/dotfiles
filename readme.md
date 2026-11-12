@@ -101,7 +101,7 @@ After installing Herdr on a new computer, run the following to install the confi
 herdrinstall
 ```
 
-The function installs `kryptamine/herdr-auto-title`, `levi-qiao/herdr-agent-quota`, and all supported Herdr integrations listed by the CLI. It returns a failure status if any individual installation fails.
+The function installs `levi-qiao/herdr-agent-quota` and all supported Herdr integrations listed by the CLI. It returns a failure status if any individual installation fails.
 
 ## Creating an ~/.nvimrc (Custom Neovim) and ~/.ovimrc (Custom Original Vim)
 
