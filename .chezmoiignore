@@ -5,6 +5,7 @@ docker-compose.yml
 CLAUDE.md
 AGENTS.md
 .github
+tests
 skills-lock.json
 .copilot-skills
 

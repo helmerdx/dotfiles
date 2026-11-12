@@ -21,6 +21,7 @@ export const PREFIX_BINDINGS = [
   ["b", "Toggle sidebar", "layout.toggle", { id: "sidebar" }],
   ["q", "Close window, keep terminals", "window.close"],
   ["N", "New space", "space.new"],
+  [",", "Rename tab", "tab.rename"],
   ["T", "Rename tab", "tab.rename"],
   ["W", "Rename space", "space.rename"],
   ["?", "All app shortcuts", "app.help"],
