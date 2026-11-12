@@ -116,6 +116,35 @@ herdrinstall
 
 The function installs `levi-qiao/herdr-agent-quota` and all supported Herdr integrations listed by the CLI. It returns a failure status if any individual installation fails.
 
+### Herdr desktop app
+
+The desktop app has a separate configuration under `~/.config/herdr-app`. Its personal `helmer` layout is cloned from the shipped main layout, with Solarized light/dark themes, a purple accent, sounds, pane borders and gaps. Existing zoom, ligature, and contrast preferences are preserved. `~/.config/herdr-core/config.toml` selects login zsh for new terminals.
+
+After applying these files on another machine, select the personal layout:
+
+```bash
+herdr-app do layout.switch --name helmer
+```
+
+The migrated shortcuts apply only in this layout, so other layouts retain their native shortcuts:
+
+| Shortcut | Action |
+| --- | --- |
+| `Ctrl+Space`, then `c` | Name and create a tab |
+| `Ctrl+Space`, then `1` through `9` | Select a tab |
+| `Cmd+1` through `Cmd+9`, or prefix then `Alt+number` | Select an agent in stable space/tab/pane order |
+| `Ctrl+Alt+[` / `Ctrl+Alt+]` | Previous / next tab |
+| `Ctrl+Alt+H/J/K/L`, or prefix then `h/j/k/l` | Focus a pane |
+| Prefix then `v` / `-` | Split right / down |
+| Prefix then `Shift+H/J/K/L` | Swap panes |
+| Prefix then `x` / `Shift+X` / `Shift+D` | Confirm closing a pane / tab / space |
+| Prefix then `z`, `w` or `g`, `b`, `q` | Zoom, picker, sidebar, close the window while terminals keep running |
+| `Ctrl+Space` twice | Send a literal prefix to the focused terminal through `hc keys` |
+
+The `helmer-keys` mod keeps the prefix open until a key is pressed or Escape cancels. Its button appears in the status bar. Agent numbers follow workspace order rather than the sidebar's dynamic priority sorting. `Cmd+T` also asks for a tab name; `Cmd+W` and `Cmd+Shift+W` confirm closing tabs and panes. Vim/Neovim configuration is unchanged, and plain `Ctrl+H/J/K/L` stays with terminal programs.
+
+Some TUI settings have no desktop equivalent in herdr-app 0.1.15: keyboard resize mode (drag dividers instead), copy mode (select text and use `Cmd+C`), delayed system notifications, the 50 MiB scrollback setting, and automatic restoration of agent conversations after a core restart. The desktop renderer currently has a fixed 10 MB / 10,000-line scrollback limit. New panes follow the focused folder; kept terminals recover as shells after a restart. The old TUI config and its sessions remain independent.
+
 ## Creating an ~/.nvimrc (Custom Neovim) and ~/.ovimrc (Custom Original Vim)
 
 Chezmoi will create the file when you start it the first time. Make sure the content is nearly similar to the next file contents

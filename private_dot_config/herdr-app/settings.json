@@ -1,0 +1,17 @@
+{
+  "zoom": 1.0,
+  "sounds": {
+    "enabled": true
+  },
+  "font": "MonoLisaCodeHelmer Nerd Font",
+  "font_ligatures": false,
+  "minimum_contrast": 1.0,
+  "theme": {
+    "light": "solarized-light",
+    "dark": "solarized-dark"
+  },
+  "colors": {
+    "accent": "#6c71c4"
+  },
+  "font_size": 16
+}

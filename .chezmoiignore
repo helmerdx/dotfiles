@@ -19,3 +19,7 @@ skills-lock.json
 .config/nvim/lazyvim.json
 .cache/nvim
 .local/share/nvim
+
+# The app generates these files for its personal mods.
+.config/herdr-app/mods/*/*.d.ts
+.config/herdr-app/mods/*/jsconfig.json

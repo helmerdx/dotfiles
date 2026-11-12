@@ -1,0 +1,14 @@
+{
+  "place": "none",
+  "title": "Migrated Herdr shortcuts",
+  "overlay": {
+    "kind": "popup",
+    "at": "top",
+    "offset": 48,
+    "width": 620,
+    "height": 560,
+    "props": {
+      "mode": "prefix"
+    }
+  }
+}

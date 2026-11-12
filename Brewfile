@@ -56,4 +56,5 @@ brew "rustup"
 brew "zoxide"
 
 cask "alacritty"
+cask "herdr-app"
 cask "kitty"

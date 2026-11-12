@@ -1,0 +1,2 @@
+# Match the TUI: zsh with the macOS login environment.
+shell = ["/bin/zsh", "-l"]

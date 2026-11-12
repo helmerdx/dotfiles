@@ -3,6 +3,10 @@
 .claude/settings.local.json
 CLAUDE.local.md
 
+# Herdr writes editor support files while validating personal mods.
+private_dot_config/herdr-app/mods/*/*.d.ts
+private_dot_config/herdr-app/mods/*/jsconfig.json
+
 # Secrets and machine-local credentials
 .env
 .env.*
