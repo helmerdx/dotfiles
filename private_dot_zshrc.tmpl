@@ -312,7 +312,8 @@ function treehouse_herdr_tab {
   tab_json=$(herdr tab create --workspace "$HERDR_WORKSPACE_ID" --cwd "$worktree_path" --label "🌳 $name" --focus) || return 1
   root_pane=$(jq -r '.result.root_pane.pane_id' <<< "$tab_json")
 
-  right_pane=$(herdr pane split --pane "$root_pane" --direction right --ratio 0.5 --cwd "$worktree_path" | jq -r '.result.pane.pane_id') || return 1
+  # Give the main chat pane 60% of the width and the right column 40%.
+  right_pane=$(herdr pane split --pane "$root_pane" --direction right --ratio 0.6 --cwd "$worktree_path" | jq -r '.result.pane.pane_id') || return 1
   herdr pane split --pane "$right_pane" --direction down --ratio 0.5 --cwd "$worktree_path" >/dev/null
 }
 
