@@ -40,7 +40,7 @@ prefix = "ctrl+space"
 
 new_tab = "prefix+c"
 switch_tab = "prefix+1..9"
-focus_agent = "prefix+alt+1..9"
+focus_agent = ["prefix+alt+1..9", "cmd+1..9"]
 next_tab = ["prefix+n", "ctrl+alt+]"]
 previous_tab = ["prefix+p", "ctrl+alt+["]
 

@@ -1,14 +1,20 @@
 # By default Reload config with shft + cmd + , 
 
 #theme = rose-pine
-theme = dark:lovelace,light:catppuccin-latte
+# theme = dark:lovelace,light:catppuccin-latte
+# theme = dark:lovelace,light:Alabaster
+theme = dark:lovelace,light:Flexoki Light
 background-opacity = 0.95
 background-blur-radius = 20
 
-#font-family = JetBrainsMonoNL Nerd Font Mono
-#font-family = RecMonoDuotone Nerd Font 
-font-family = RecMonoLinear Nerd Font
+# font-family = JetBrainsMono Nerd Font Mono
+# font-family = CaskaydiaCove Nerd Font Mono
+font-family = MonoLisaCodeHelmer Nerd Font
+# font-family = RecMonoDuotone Nerd Font
+# font-family = RecMonoLinear Nerd Font
 font-size = 20
+# font-style = MediumRegular
+# font-style = SemiBoldRegular
 font-style = Bold
 cursor-style = block
 cursor-style-blink = false
@@ -32,6 +38,17 @@ auto-update = check
 # For Simple Keybinds
 # keybind = super+r=reload_config 
 keybind = super+i=inspector:toggle
+
+# Pass Cmd+1..9 through to Herdr for direct agent navigation.
+keybind = super+1=unbind
+keybind = super+2=unbind
+keybind = super+3=unbind
+keybind = super+4=unbind
+keybind = super+5=unbind
+keybind = super+6=unbind
+keybind = super+7=unbind
+keybind = super+8=unbind
+keybind = super+9=unbind
 
 # Similar Tmux but with Ghostty
 # (ctrl b for tmux -> cmb b for ghostty)
