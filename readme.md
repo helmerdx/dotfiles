@@ -145,9 +145,10 @@ The migrated shortcuts apply only in this layout, so other layouts retain their 
 | Shortcut | Action |
 | --- | --- |
 | `Ctrl+Space`, then `c` | Name and create a tab |
-| `Ctrl+Space`, then `1` through `9` | Select a tab |
+| `Ctrl+Space`, then `1` through `9` | Select an agent in stable space/tab/pane order |
+| Prefix then `Shift+1` through `Shift+9` | Select a tab |
 | Prefix then `,` or `Shift+T` | Rename the current tab |
-| `Cmd+1` through `Cmd+9`, or prefix then `Alt+number` | Select an agent in stable space/tab/pane order |
+| `Cmd+1` through `Cmd+9` | Select an agent in stable space/tab/pane order |
 | `Ctrl+Alt+[` / `Ctrl+Alt+]` | Previous / next tab |
 | `Ctrl+Alt+H/J/K/L`, or prefix then `h/j/k/l` | Focus a pane |
 | Prefix then `v` / `-` | Split right / down |

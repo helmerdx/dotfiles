@@ -147,7 +147,7 @@ export default class MigratedShortcuts extends View {
             .on_click(() => this.perform({ command, args: argumentsForAction ?? {} }))
             .child(div().w(32).font_semibold().text_color(colors.accent).child(key))
             .child(div().flex_1().child(label)))))
-      .child(div().text_size(14).text_color(colors.muted).child("1-9: tabs | Alt+1-9 or Cmd+1-9: agents in workspace order"))
+      .child(div().text_size(14).text_color(colors.muted).child("1-9: agents in workspace order | Shift+1-9: tabs"))
       .child(div().text_size(14).text_color(colors.muted).child("Resize: drag a divider. Copy: select text, then Cmd+C."));
   }
 }

@@ -28,14 +28,16 @@ export const PREFIX_BINDINGS = [
 ];
 
 export function prefixAction(event) {
-  if (event.modifiers?.control || event.modifiers?.platform) return null;
+  if (event.modifiers?.control || event.modifiers?.platform || event.modifiers?.alt) return null;
   const key = event.key_char || (event.modifiers?.shift ? event.key.toUpperCase() : event.key);
-  if (/^[1-9]$/.test(key)) {
-    return event.modifiers?.alt
-      ? { command: "agent", args: { index: Number(key) } }
-      : { command: "tab.select", args: { index: Number(key) } };
+  // Shifted number keys may arrive as their printed symbols instead of digits.
+  const numberKey = /^[1-9]$/.test(event.key) ? event.key : key;
+  const index = /^[1-9]$/.test(numberKey)
+    ? Number(numberKey)
+    : event.modifiers?.shift ? "!@#$%^&*(".indexOf(numberKey) + 1 : 0;
+  if (index > 0) {
+    return { command: event.modifiers?.shift ? "tab.select" : "agent", args: { index } };
   }
-  if (event.modifiers?.alt) return null;
   const binding = PREFIX_BINDINGS.find(([shortcut]) => shortcut === key);
   return binding ? { command: binding[2], args: binding[3] ?? {} } : null;
 }
