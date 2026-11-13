@@ -40,6 +40,17 @@ auto-update = check
 keybind = super+i=inspector:toggle
 
 # Pass Cmd+1..9 through to Herdr for direct agent navigation.
+# Ghostty's default tab shortcuts use physical digit keys, which take priority
+# over character bindings. Unbind both forms so neither consumes the shortcut.
+keybind = super+digit_1=unbind
+keybind = super+digit_2=unbind
+keybind = super+digit_3=unbind
+keybind = super+digit_4=unbind
+keybind = super+digit_5=unbind
+keybind = super+digit_6=unbind
+keybind = super+digit_7=unbind
+keybind = super+digit_8=unbind
+keybind = super+digit_9=unbind
 keybind = super+1=unbind
 keybind = super+2=unbind
 keybind = super+3=unbind
