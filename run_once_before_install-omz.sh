@@ -12,7 +12,8 @@ if [ ! -f "$HOME/.oh-my-zsh/oh-my-zsh.sh" ]; then
   mkdir -p "$HOME/.oh-my-zsh"
   cp -R "$install_directory/oh-my-zsh/." "$HOME/.oh-my-zsh/"
 
-  if [ "${SHELL:-}" != "$zsh_path" ]; then
+  # Omarchy launches Zsh from Bash and uses Bash as the login shell.
+  if [ "${SHELL:-}" != "$zsh_path" ] && ! grep -qx 'ID=omarchy' /etc/os-release 2>/dev/null; then
     chsh -s "$zsh_path"
   fi
 fi

@@ -1,13 +1,33 @@
-{{- if eq .chezmoi.os "darwin" }}
-{{-   if eq .chezmoi.arch "arm64" }}
+{{- $omarchy := and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.id "omarchy") -}}
+{{- if $omarchy -}}
+# Load Omarchy's environment for interactive and non-interactive Bash.
+[[ -r /usr/share/omarchy/default/bash/env-bootstrap ]] && source /usr/share/omarchy/default/bash/env-bootstrap
+[[ $- != *i* ]] && return
+{{- else }}
+{{-   if eq .chezmoi.os "darwin" }}
+{{-     if eq .chezmoi.arch "arm64" }}
 export PATH=/opt/homebrew/bin:$PATH
 export PATH=/opt/homebrew/sbin:$PATH
-{{-   end }}
-{{- else }}
+{{-     end }}
+{{-   else }}
 . "$HOME/.cargo/env"
-{{- end }}
+{{-   end }}
 # Volta configuration
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
 # Importing fzf configuration
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+{{- end }}
+
+if [[ $- == *i* && -r "$HOME/.config/shell/aliases.sh" ]]; then
+  source "$HOME/.config/shell/aliases.sh"
+fi
+{{- if $omarchy }}
+
+if [[ -r /usr/share/omarchy-zsh/templates/bashrc && -r "$HOME/.zshrc" &&
+      $SHLVL == 1 && -z ${BASH_EXECUTION_STRING:-} ]] && command -v zsh >/dev/null 2>&1; then
+  source /usr/share/omarchy-zsh/templates/bashrc
+else
+  source "${OMARCHY_PATH:-/usr/share/omarchy}/default/bash/rc"
+fi
+{{- end }}

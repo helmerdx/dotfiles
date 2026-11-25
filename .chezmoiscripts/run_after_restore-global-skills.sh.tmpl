@@ -1,0 +1,53 @@
+{{- if and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.id "omarchy") -}}
+#!/bin/bash
+set -euo pipefail
+
+# Prefer the system Node so a no-op restore doesn't activate Mise's lazy tools.
+node_path=$(command -p -v node || command -v node)
+"$node_path" --input-type=module <<'JS'
+import { spawnSync } from 'node:child_process';
+import { existsSync, lstatSync, mkdirSync, readFileSync, symlinkSync } from 'node:fs';
+import { homedir } from 'node:os';
+import { dirname, join } from 'node:path';
+
+const lockPath = {{ joinPath .chezmoi.sourceDir "dot_agents/dot_skill-lock.json" | toJson }};
+const { skills } = JSON.parse(readFileSync(lockPath, 'utf8'));
+const installed = (name) => existsSync(join(homedir(), '.agents', 'skills', name, 'SKILL.md'));
+const missingBySource = new Map();
+
+// Keep the installer pointed at the lockfile managed by chezmoi on new setups.
+if (process.env.XDG_STATE_HOME) {
+  const stateLock = join(process.env.XDG_STATE_HOME, 'skills', '.skill-lock.json');
+  if (!lstatSync(stateLock, { throwIfNoEntry: false })) {
+    mkdirSync(dirname(stateLock), { recursive: true });
+    symlinkSync(join(homedir(), '.agents', '.skill-lock.json'), stateLock);
+  }
+}
+
+for (const [name, entry] of Object.entries(skills)) {
+  if (installed(name)) continue;
+
+  const source = entry.sourceBaseUrl || entry.sourceUrl;
+  if (!missingBySource.has(source)) missingBySource.set(source, []);
+  missingBySource.get(source).push(name);
+}
+
+let failed = false;
+for (const [source, names] of missingBySource) {
+  const result = spawnSync('npx', [
+    '--yes', 'skills', 'add', source,
+    '--global', '--agent', 'codex', '--yes', '--skill', ...names,
+  ], {
+    stdio: 'inherit',
+    env: { ...process.env, INSTALL_INTERNAL_SKILLS: '1' },
+  });
+
+  if (result.error) console.error(result.error.message);
+  const missing = names.filter((name) => !installed(name));
+  if (missing.length) console.error(`Skills still missing: ${missing.join(', ')}`);
+  if (result.status !== 0 || missing.length) failed = true;
+}
+
+if (failed) process.exitCode = 1;
+JS
+{{- end -}}

@@ -118,6 +118,8 @@ After changing skills through `npx skills`, refresh its complete generated lock 
 chezmoi re-add ~/.agents/.skill-lock.json
 ```
 
+On Omarchy, `chezmoi apply` restores missing global Codex skills from the repository lockfile using `npx skills`. Skills already present in `~/.agents/skills` are skipped.
+
 Let each installer generate its records; preserve unrelated entries when saving them to chezmoi. Keep one installer responsible for updates and removals of each skill. Handing an existing skill over to Skillshare requires a backup and an explicit reinstall from its recorded source. Neither record contains the skill contents; back up custom skill files separately and restore or reinstall skill contents on a new machine.
 
 ## Herdr setup

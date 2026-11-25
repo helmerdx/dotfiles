@@ -1,3 +1,9 @@
+{{- $omarchyZsh := and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.id "omarchy") (lookPath "omarchy-setup-zsh") -}}
+{{- if $omarchyZsh -}}
+[[ $- != *i* ]] && return
+[[ -r /usr/share/omarchy/default/bash/env-bootstrap ]] && source /usr/share/omarchy/default/bash/env-bootstrap
+
+{{ end -}}
 GREEN="\033[1;32m"
 NOCOLOR="\033[0m"
 
@@ -105,10 +111,12 @@ export PATH=/opt/homebrew/sbin:$PATH
 {{ end }}
 #export BAT_THEME="OneHalfLight"
 export BAT_THEME="Catppuccin-frappe"
+{{- if not $omarchyZsh }}
 # Used by tmux
 export TERM="xterm-256color"
-# FZF default search engine (requires ripgrep)
 export FZF_COMPLETION_TRIGGER="~~"
+{{- end }}
+# FZF default search engine (requires ripgrep)
 export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
 export FZF_DEFAULT_OPTS="--height=40% --layout=reverse --info=inline --border --margin=1 --padding=1"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
@@ -117,22 +125,28 @@ zstyle ':omz:update' frequency 7
 
 export EDITOR=vim
 
+{{- if not $omarchyZsh }}
 # ZSH Vi Mode cursor
 function zvm_config {
   ZVM_CURSOR_STYLE_ENABLED=false
   ZVM_VI_INSERT_ESCAPE_BINDKEY=jj
 }
+{{- end }}
 
 plugins=(
     aliases
     aws
     brew
+{{- if not $omarchyZsh }}
     colored-man-pages
+{{- end }}
     composer
     docker
     docker-compose
+{{- if not $omarchyZsh }}
     fzf-tab
     fast-syntax-highlighting
+{{- end }}
     gh
     git
     gpg-agent
@@ -147,7 +161,9 @@ plugins=(
     tmux
     zsh-better-npm-completion
     zsh-autosuggestions
+{{- if not $omarchyZsh }}
     zsh-vi-mode
+{{- end }}
 )
 
 if exist eza; then
@@ -185,6 +201,9 @@ fpath=({{ .chezmoi.homeDir }}/.docker/completions $fpath)
 
 source $ZSH/oh-my-zsh.sh
 
+if [[ -r "$HOME/.config/shell/aliases.sh" ]]; then
+  source "$HOME/.config/shell/aliases.sh"
+fi
 
 function npm_ci_install {
     npm ci
@@ -268,13 +287,10 @@ alias tfocusf=tmux_focus_fancy
 alias tfocus=tmux_focus_real
 alias tunfocus=tmux_unfocus
 
-alias hc="eza -l -a --icons --git --octal-permissions"
 alias hdoc="cht.sh"
 alias hgco=git_checkout_fzf
 # Alacritty config
 alias alacrittyconfig="vim ~/.config/alacritty/alacritty.yml"
-# Lazygit
-alias lg="lazygit"
 # Bat aliases for different theme
 alias batl="bat --theme=Catppuccin-latte"
 alias batd="bat --theme=Catppuccin-frappe"
@@ -283,11 +299,6 @@ alias cup="composer outdated --outdated --direct"
 # Use fzf + Bat
 alias fzfbl="fzf --preview 'bat --theme=Catppuccin-latte --style=numbers --color=always --line-range :500 {}'"
 alias fzfbd="fzf --preview 'bat --theme=Catppuccin-frappe --style=numbers --color=always --line-range :500 {}'"
-# --
-# Treehouse aliases
-alias th="treehouse"
-alias ths="treehouse status"
-alias the="treehouse enter"
 # --
 # Treehouse + Herdr worktree tab
 function treehouse_herdr_tab {
@@ -379,7 +390,6 @@ alias gotopl="gotop -c default-dark"
 # --
 alias p10kconfig="vim ~/.p10k.zsh"
 alias tmuxconfig="vim ~/.tmux.conf"
-alias pn="pnpm"
 alias zr="source ~/.zshrc"
 alias zshconfig="vim ~/.zshrc"
 # Vim aliases
@@ -430,7 +440,9 @@ alias pbpaste="powershell.exe -command 'Get-Clipboard' | head -n -1"
 {{-   end }}
 {{- end }}
 
+{{- if not $omarchyZsh }}
 ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+{{- end }}
 
 {{ if (eq .chezmoi.os "darwin") }}
 # tabtab source for packages
@@ -441,6 +453,7 @@ ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+{{- if not $omarchyZsh }}
 # Starship
 eval "$(starship init zsh)"
 
@@ -454,19 +467,29 @@ function zvm_after_init() {
 if exist mise; then
   eval "$(mise activate zsh)"
 fi
+{{- end }}
 
 # Direnv (per-directory env vars via .envrc)
 if exist direnv; then
   eval "$(direnv hook zsh)"
 fi
 
+{{- if not $omarchyZsh }}
 # Zoxide (smarter cd — use 'z <dir>' instead of 'cd <dir>')
 if exist zoxide; then
   eval "$(zoxide init zsh)"
 fi
+{{- end }}
 
 # Personal commands for different companies
 [ -f ~/.personal.zsh ] && source ~/.personal.zsh
 
 # sentry
 fpath=("{{ .chezmoi.homeDir }}/.local/share/zsh/site-functions" $fpath)
+{{- if $omarchyZsh }}
+
+# Load Omarchy last so its aliases, keybindings, and completion take precedence.
+unalias ga gd tds 2>/dev/null || true
+source /usr/share/omarchy-zsh/shell/zoptions
+source /usr/share/omarchy-zsh/shell/all
+{{- end }}
