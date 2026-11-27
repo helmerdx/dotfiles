@@ -4,7 +4,8 @@
     url = "https://github.com/paulbkim-dev/vim-herdr-navigation.git"
     refreshPeriod = "24h"
     [".local/share/herdr/plugins/vim-herdr-navigation".pull]
-        args = ["--ff-only"]
+        # Pull the remote's default branch so existing checkouts survive upstream branch renames (main -> master).
+        args = ["--ff-only", "origin", "HEAD"]
 
 [".oh-my-zsh/custom/plugins/fast-syntax-highlighting"]
     type = "git-repo"
