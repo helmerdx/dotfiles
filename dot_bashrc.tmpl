@@ -31,3 +31,7 @@ else
   source "${OMARCHY_PATH:-/usr/share/omarchy}/default/bash/rc"
 fi
 {{- end }}
+
+if [[ $- == *i* && -r "$HOME/.config/shell/codex-aliases.sh" ]]; then
+  source "$HOME/.config/shell/codex-aliases.sh"
+fi

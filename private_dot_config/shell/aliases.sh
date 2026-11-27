@@ -10,3 +10,9 @@ alias pn='pnpm'
 alias th='treehouse'
 alias ths='treehouse status'
 alias the='treehouse enter'
+
+# Claude Code
+alias cl='claude --permission-mode auto'
+alias clc='claude --permission-mode auto --continue'
+alias clr='claude --permission-mode auto --resume'
+alias clw='claude --permission-mode auto --worktree'

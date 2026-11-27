@@ -1,0 +1,14 @@
+alias cx='codex --approve-for-me'
+alias cxc='codex resume --last --approve-for-me'
+alias cxr='codex resume --approve-for-me'
+alias cxw='codex --approve-for-me --worktree'
+{{- if and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.id "omarchy") }}
+
+# Omarchy's tmux layouts use cx to open Claude by default.
+if alias ix >/dev/null 2>&1; then
+  alias ix='tdl cl'
+fi
+if alias icx >/dev/null 2>&1; then
+  alias icx='tdl c cl'
+fi
+{{- end }}

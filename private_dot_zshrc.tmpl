@@ -493,3 +493,7 @@ unalias ga gd tds 2>/dev/null || true
 source /usr/share/omarchy-zsh/shell/zoptions
 source /usr/share/omarchy-zsh/shell/all
 {{- end }}
+
+if [[ -r "$HOME/.config/shell/codex-aliases.sh" ]]; then
+  source "$HOME/.config/shell/codex-aliases.sh"
+fi
