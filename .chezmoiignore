@@ -17,7 +17,6 @@ skills-lock.json
 .oh-my-zsh/plugins/aliases
 
 # Neovim
-.config/nvim/lazyvim.json
 .cache/nvim
 .local/share/nvim
 

@@ -163,6 +163,14 @@ The `helmer-keys` mod keeps the prefix open until a key is pressed or Escape can
 
 Some TUI settings have no desktop equivalent in herdr-app 0.1.15: keyboard resize mode (drag dividers instead), copy mode (select text and use `Cmd+C`), delayed system notifications, the 50 MiB scrollback setting, and automatic restoration of agent conversations after a core restart. The desktop renderer currently has a fixed 10 MB / 10,000-line scrollback limit. New panes follow the focused folder; kept terminals recover as shells after a restart. The old TUI config and its sessions remain independent.
 
+## Neovim plugins
+
+Every machine runs exactly the plugins and versions in `private_dot_config/nvim/lazy-lock.json`. On any change to the lockfile, the LazyVim extras, or a file under `nvim/lua/`, `chezmoi apply` installs missing plugins, pins all of them to the lockfile, and removes plugins the spec no longer declares.
+
+- LazyVim extras live in `private_dot_config/nvim/modify_lazyvim.json`. chezmoi owns only the `extras` list there; LazyVim keeps managing `news` and `version`. Change extras in that file rather than with `:LazyExtras`, which chezmoi would revert.
+- Theme plugins are declared in `nvim/lua/plugins/themes.lua` so every machine has the same set. The active theme is per machine: `colorscheme.lua` is created once and never overwritten.
+- To update plugins, run `:Lazy update` on one machine, then `chezmoi re-add ~/.config/nvim/lazy-lock.json` and commit.
+
 ## Creating an ~/.nvimrc (Custom Neovim) and ~/.ovimrc (Custom Original Vim)
 
 Chezmoi will create the file when you start it the first time. Make sure the content is nearly similar to the next file contents

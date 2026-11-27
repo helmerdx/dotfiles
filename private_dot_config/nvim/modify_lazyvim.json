@@ -1,0 +1,42 @@
+{{- /* chezmoi:modify-template */ -}}
+{{- /*
+  The LazyVim extras every machine runs. chezmoi owns only "extras"; LazyVim
+  keeps writing "news", "version" and "install_version" itself, so those never
+  show up as drift. Change extras here (not with :LazyExtras), keep the list
+  sorted, and commit the lazy-lock.json that results.
+*/ -}}
+{{- $extras := list
+  "lazyvim.plugins.extras.ai.claudecode"
+  "lazyvim.plugins.extras.coding.mini-surround"
+  "lazyvim.plugins.extras.coding.yanky"
+  "lazyvim.plugins.extras.editor.navic"
+  "lazyvim.plugins.extras.editor.snacks_explorer"
+  "lazyvim.plugins.extras.editor.snacks_picker"
+  "lazyvim.plugins.extras.formatting.prettier"
+  "lazyvim.plugins.extras.lang.astro"
+  "lazyvim.plugins.extras.lang.docker"
+  "lazyvim.plugins.extras.lang.json"
+  "lazyvim.plugins.extras.lang.markdown"
+  "lazyvim.plugins.extras.lang.python"
+  "lazyvim.plugins.extras.lang.tailwind"
+  "lazyvim.plugins.extras.lang.toml"
+  "lazyvim.plugins.extras.lang.typescript"
+  "lazyvim.plugins.extras.lang.yaml"
+  "lazyvim.plugins.extras.linting.eslint"
+  "lazyvim.plugins.extras.test.core"
+  "lazyvim.plugins.extras.util.chezmoi"
+  "lazyvim.plugins.extras.util.dot"
+  "lazyvim.plugins.extras.util.gh"
+  "lazyvim.plugins.extras.util.mini-hipatterns"
+-}}
+{{- /* A file without "version" makes LazyVim run its v0 migration, which mangles extras names. */ -}}
+{{- $config := dict "version" 8 -}}
+{{- if .chezmoi.stdin -}}
+{{-   $config = fromJson .chezmoi.stdin -}}
+{{- end -}}
+{{- if eq (toJson (sortAlpha (get $config "extras" | default list))) (toJson $extras) -}}
+{{-   .chezmoi.stdin -}}
+{{- else -}}
+{{-   $config = setValueAtPath "extras" $extras $config -}}
+{{-   toPrettyJson $config -}}
+{{- end -}}

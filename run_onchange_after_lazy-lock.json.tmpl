@@ -1,33 +1,59 @@
 #!/bin/bash
-set -eu
+set -euo pipefail
 
-# This script runs whenever lazy-lock.json changes
-# It restores Neovim plugins to the versions in the lockfile.
-
-{{- if (eq .chezmoi.os "linux") }}
-{{-   if (or (eq .chezmoi.osRelease.id "ubuntu") (eq .chezmoi.osRelease.id "linuxmint")) }}
-
-# lazy-lock.json hash: {{ include "private_dot_config/nvim/lazy-lock.json" | sha256sum }}
-
-if command -v nvim &> /dev/null; then
-    echo "Syncing Neovim plugins with lazy-lock.json..."
-    nvim --headless "+Lazy! restore" +qa
-    echo "Neovim plugins synced successfully!"
-else
-    echo "Warning: nvim not found in PATH, skipping plugin sync"
-fi
-
-{{-   end }}
-{{- else if (eq .chezmoi.os "darwin") }}
-
-# lazy-lock.json hash: {{ include "private_dot_config/nvim/lazy-lock.json" | sha256sum }}
-
-if command -v nvim &> /dev/null; then
-    echo "Syncing Neovim plugins with lazy-lock.json..."
-    nvim --headless "+Lazy! restore" +qa
-    echo "Neovim plugins synced successfully!"
-else
-    echo "Warning: nvim not found in PATH, skipping plugin sync"
-fi
-
+# Keep Neovim plugins identical to the dotfiles on every machine: install the
+# missing ones, pin all of them to lazy-lock.json and remove any plugin the
+# spec no longer declares.
+# chezmoi re-runs this whenever one of the inputs below changes:
+# private_dot_config/nvim/lazy-lock.json {{ include "private_dot_config/nvim/lazy-lock.json" | sha256sum }}
+# private_dot_config/nvim/modify_lazyvim.json {{ include "private_dot_config/nvim/modify_lazyvim.json" | sha256sum }}
+{{- range (glob (joinPath .chezmoi.sourceDir "private_dot_config/nvim/lua/**/*.lua")) }}
+# {{ trimPrefix (print $.chezmoi.sourceDir "/") . }} {{ include . | sha256sum }}
 {{- end }}
+
+if ! command -v nvim >/dev/null 2>&1; then
+  echo "Warning: nvim not found in PATH, skipping plugin sync" >&2
+  exit 0
+fi
+
+# nvim exits 0 even when a plugin fails to clone, so verify the result against
+# the dotfiles' lockfile and fail (chezmoi then re-runs this on the next apply).
+verify_script=$(mktemp)
+trap 'rm -f "$verify_script"' EXIT
+cat > "$verify_script" <<'LUA'
+local Config = require("lazy.core.config")
+local Git = require("lazy.manage.git")
+local lock = vim.json.decode(table.concat(vim.fn.readfile(vim.env.DOTFILES_LAZY_LOCK), "\n"))
+local problems = {}
+for name, plugin in pairs(Config.plugins) do
+  local info = plugin._.installed and Git.info(plugin.dir)
+  if not lock[name] then
+    table.insert(problems, name .. ": declared by the spec but not pinned in lazy-lock.json")
+  elseif not info then
+    table.insert(problems, name .. ": not installed")
+  elseif info.commit ~= lock[name].commit then
+    table.insert(problems, name .. ": at " .. info.commit .. ", expected " .. lock[name].commit)
+  end
+end
+for name in pairs(lock) do
+  if not Config.plugins[name] then
+    table.insert(problems, name .. ": pinned in lazy-lock.json but not declared by the spec")
+  end
+end
+for name, kind in vim.fs.dir(Config.options.root) do
+  if kind == "directory" and not Config.plugins[name] then
+    table.insert(problems, name .. ": installed but not declared by the spec")
+  end
+end
+if #problems > 0 then
+  table.sort(problems)
+  io.stderr:write("Neovim plugins do not match the dotfiles:\n  " .. table.concat(problems, "\n  ") .. "\n")
+  vim.cmd("cquit 1")
+end
+vim.cmd("qa")
+LUA
+
+echo "Syncing Neovim plugins with the dotfiles..."
+DOTFILES_LAZY_LOCK={{ joinPath .chezmoi.sourceDir "private_dot_config/nvim/lazy-lock.json" | quote }} \
+  nvim --headless "+Lazy! install" "+Lazy! restore" "+Lazy! clean" "+luafile $verify_script"
+echo "Neovim plugins synced successfully!"
