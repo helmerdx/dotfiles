@@ -455,6 +455,13 @@ ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
 
 {{- if not $omarchyZsh }}
 # Starship
+# Machine name for the prompt. On macOS `hostname` can be a DHCP-assigned IP,
+# while LocalHostName is what `ssh <name>.local` resolves on any network.
+{{- if eq .chezmoi.os "darwin" }}
+export PROMPT_HOSTNAME="$(scutil --get LocalHostName 2>/dev/null || hostname -s)"
+{{- else }}
+export PROMPT_HOSTNAME="${HOST%%.*}"
+{{- end }}
 eval "$(starship init zsh)"
 
 # FZF (must load after zsh-vi-mode resets keybindings on init - see zsh-vi-mode README)

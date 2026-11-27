@@ -8,7 +8,9 @@ format = """
 [](color_orange)\
 $os\
 $username\
-[](bg:color_yellow fg:color_orange)\
+[](bg:color_purple fg:color_orange)\
+${env_var.PROMPT_HOSTNAME}\
+[](bg:color_yellow fg:color_purple)\
 $directory\
 [](fg:color_yellow bg:color_aqua)\
 $git_branch\
@@ -25,12 +27,10 @@ $kotlin\
 $haskell\
 $python\
 $package\
-[](fg:color_blue bg:color_bg3)\
+[](fg:color_blue bg:color_bg3)\
 $docker_context\
 $conda\
-[](fg:color_bg3 bg:color_bg1)\
-$time\
-[ ](fg:color_bg1)\
+[ ](fg:color_bg3)\
 $cmd_duration\
 $line_break$character"""
 
@@ -87,6 +87,11 @@ show_always = true
 style_user = "bg:color_orange fg:color_fg0"
 style_root = "bg:color_orange fg:color_fg0"
 format = '[ $user ]($style)'
+
+# Set in ~/.zshrc: the stable machine name to `ssh <name>.local` to.
+[env_var.PROMPT_HOSTNAME]
+style = "bg:color_purple fg:color_fg0"
+format = '[ $env_value ]($style)'
 
 [directory]
 style = "fg:color_fg0 bg:color_yellow"
@@ -156,12 +161,6 @@ format = '[[ $symbol( $context) ](fg:#83a598 bg:color_bg3)]($style)'
 [conda]
 style = "bg:color_bg3"
 format = '[[ $symbol( $environment) ](fg:#83a598 bg:color_bg3)]($style)'
-
-[time]
-disabled = false
-time_format = "%R"
-style = "bg:color_bg1"
-format = '[[  $time ](fg:color_fg0 bg:color_bg1)]($style)'
 
 [line_break]
 disabled = false
